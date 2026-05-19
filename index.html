@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>City of Grace Church</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%234f6d7a'/%3E%3Cpath d='M50 18 L50 72 M35 35 L65 35' stroke='white' stroke-width='8' stroke-linecap='round'/%3E%3Cpath d='M32 78 Q50 58 68 78' fill='none' stroke='%23ffd700' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: #111827;
+      color: #e5e7eb;
+      line-height: 1.6;
+    }
+
+    header {
+      width: 100%;
+      left: 0;
+      top: 0;
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      color: white;
+      padding: 20px 40px;
+      position: fixed;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: white;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #ffd700;
+    }
+
+    .hero {
+      margin-top: 0;
+      height: 100vh;
+      background: linear-gradient(rgba(0,0,0,0.72), rgba(0,0,0,0.78)),
+        url('https://scontent-jnb2-1.xx.fbcdn.net/v/t39.30808-6/675107369_122339964032009274_2592861297739935418_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=7b2446&_nc_eui2=AeHsQ9WsTLlYwlgFduiWa7H7EgCYWr5sFA8SAJhavmwUD9GNRUAtTh91oDd4IPpTvumcAfwXjhAfljlNTafek9w_&_nc_ohc=1zNzBCsnEGQQ7kNvwGXNn90&_nc_oc=Adrsvz2Eje7FJpOtPpJnvZb5ku3b7tgJcSAwUzjCtgQ9DvSG_lR-W4C34Zregpwhkn0&_nc_zt=23&_nc_ht=scontent-jnb2-1.xx&_nc_gid=1bJnwjrKVjTbh2puhz3A5Q&_nc_ss=7b2a8&oh=00_Af5CsFGC8gSW4cg-X0dVc8t7I4bg8T5L2BEmOM5sf_kCLg&oe=6A0555FA') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      padding: 20px;
+    }
+
+    .hero-content h1 {
+      font-size: 4rem;
+      margin-bottom: 15px;
+    }
+
+    .hero-content p {
+      font-size: 1.3rem;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 25px;
+      padding: 14px 28px;
+      background: #4f6d7a;
+      color: #ffffff;
+      text-decoration: none;
+      border-radius: 40px;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #6b8a99;
+      transform: translateY(-3px);
+    }
+
+    section {
+      padding: 80px 8%;
+      background: #111827;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .section-title h2 {
+      font-size: 2.5rem;
+      color: #dbeafe;
+      margin-bottom: 10px;
+    }
+
+    .about {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+      align-items: center;
+    }
+
+    .about img {
+      width: 280px;
+      height: 280px;
+      max-width: 350px;
+      object-fit: cover;
+      object-position: center top;
+      border-radius: 50%;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      display: block;
+      margin: auto;
+    }
+
+    .about-text h3 {
+      font-size: 2rem;
+      margin-bottom: 15px;
+      color: #dbeafe;
+    }
+
+    .services {
+      background: #1b2533;
+    }
+
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+    }
+
+    .service-card {
+      background: #243447;
+      color: #e5e7eb;
+      padding: 30px;
+      border-radius: 20px;
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+    .service-card h3 {
+      margin: 15px 0;
+      color: #dbeafe;
+    }
+
+    .leader {
+      margin-top: 60px;
+      background: #1b2533;
+      color: #e5e7eb;
+      text-align: center;
+      padding: 100px 8%;
+    }
+
+    .leader img {
+      width: 240px;
+      height: 240px;
+      object-fit: cover;
+      object-position: center top;
+      border-radius: 50%;
+      border: none;
+      margin-bottom: 20px;
+    }
+
+    .leader h2 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      color: #dbeafe;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+      margin-top: 50px;
+      align-items: stretch;
+    }
+
+    .service-card {
+      min-height: 360px;
+      border-radius: 24px;
+      padding: 35px 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+      backdrop-filter: blur(4px);
+      background-size: cover !important;
+      background-position: center !important;
+    }
+
+    .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.45);
+    }
+
+    .service-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 12px;
+      color: #ffffff;
+    }
+
+    .service-card p {
+      color: #f3f4f6;
+      line-height: 1.7;
+    }
+
+    .service-card strong {
+      color: #dbeafe;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .gallery-grid img {
+      width: 100%;
+      border-radius: 15px;
+      height: 250px;
+      object-fit: cover;
+    }
+
+    .contact {
+      background: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.8)), url('https://scontent-jnb2-1.xx.fbcdn.net/v/t39.30808-6/675107369_122339964032009274_2592861297739935418_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=7b2446&_nc_eui2=AeHsQ9WsTLlYwlgFduiWa7H7EgCYWr5sFA8SAJhavmwUD9GNRUAtTh91oDd4IPpTvumcAfwXjhAfljlNTafek9w_&_nc_ohc=1zNzBCsnEGQQ7kNvwGXNn90&_nc_oc=Adrsvz2Eje7FJpOtPpJnvZb5ku3b7tgJcSAwUzjCtgQ9DvSG_lR-W4C34Zregpwhkn0&_nc_zt=23&_nc_ht=scontent-jnb2-1.xx&_nc_gid=1bJnwjrKVjTbh2puhz3A5Q&_nc_ss=7b2a8&oh=00_Af5CsFGC8gSW4cg-X0dVc8t7I4bg8T5L2BEmOM5sf_kCLg&oe=6A0555FA') center/cover no-repeat;
+    }
+
+    .contact-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      background: #111827;
+      color: #ffffff;
+      width: 100%;
+      padding: 15px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      font-size: 1rem;
+    }
+
+    .contact-form button {
+      background: #4f6d7a;
+      color: white;
+      border: none;
+      padding: 14px 24px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: 0.3s;
+    }
+
+    .contact-form button:hover {
+      background: #6b8a99;
+    }
+
+    footer {
+      background: #0b1120;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .hero-content h1 {
+        font-size: 2.5rem;
+      }
+
+      nav {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <div class="logo">✝ City of Grace</div>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#leader">Leadership</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <h1>Welcome to City of Grace</h1>
+      <p>
+        A place of worship, healing, transformation, and divine encounter under the spiritual leadership of Seer 1.
+      </p>
+      <a href="#contact" class="btn">Join Us This Sunday</a>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="section-title">
+      <h2>About Us</h2>
+    <br>
+    <p style="max-width: 700px; margin:auto;">
+      City of Grace is a spirit-filled church dedicated to transforming lives through the power of Jesus Christ. Under the leadership of Apostle Mabuyangwe (Seer 1), the ministry is
+      committed to prayer, worship, prophetic teaching, deliverance, and the preaching of the Gospel.
+    <br>
+    <br>
+      At City of Grace, we believe in creating an atmosphere where people can encounter God personally, grow spiritually, and experience healing, restoration, breakthrough, and purpose.
+      Our services are centered on the Word of God, the leading of the Holy Spirit, and building strong believers rooted in faith and holiness.
+    <br>
+    <br>
+      We are more than a church — we are a spiritual family united by love, worship, prayer, and a passion for seeing lives changed through Christ. Whether you are seeking spiritual
+      growth, encouragement, deliverance, or a place to belong, City of Grace welcomes you with open arms.
+    </p>
+    </div>
+
+    <div class="about-content" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:50px; align-items:center; margin-top:50px;">
+      
+      <div class="about-image" style="text-align:center;">
+        <img src="https://scontent-jnb2-1.xx.fbcdn.net/v/t39.30808-6/487423754_122266323308009274_6579474675950520305_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=1d70fc&_nc_eui2=AeHlEwz5qtd4Sum3f_OV9bLqWaJGCt2LMchZokYK3YsxyF3XBipHLEFl-k5KZUQurU8HeOMynimhpGK1rLlFs42X&_nc_ohc=LEwP_NAyleMQ7kNvwG0SlEJ&_nc_oc=Adp9Za3Xdg0B3h1bLEbscyLy8XXk2UCpxCAABLpYfvWC0g1KT4uva7_-9i2tUraKfJM&_nc_zt=23&_nc_ht=scontent-jnb2-1.xx&_nc_gid=fYt_eLgconf01hkJ2u5lfQ&_nc_ss=7b2a8&oh=00_Af42smMa8IkPHp9_WdfYRKKKI0VZjstqp0js1jg_D-h94g&oe=6A056061" alt="Apostle Mabuyangwe" style="width:320px; height:320px; object-fit:cover; border-radius:50%; box-shadow:0 15px 35px rgba(0,0,0,0.45);">
+      </div>
+
+      <div class="about-text">
+        <div style="background:#1f2937; padding:30px; border-radius:24px; margin-bottom:25px; box-shadow:0 10px 25px rgba(0,0,0,0.3);">
+          <h3 style="margin-bottom:15px; color:#dbeafe;">Who We Are</h3>
+          <p>City of Grace is a spirit-filled church dedicated to transforming lives through the power of Jesus Christ. Under the leadership of Apostle Mabuyangwe (Seer 1), the ministry is committed to prayer, worship, prophetic teaching, deliverance, and the preaching of the Gospel.</p>
+        </div>
+
+        <div style="background:#111827; padding:30px; border-radius:24px; margin-bottom:25px; box-shadow:0 10px 25px rgba(0,0,0,0.3);">
+          <h3 style="margin-bottom:15px; color:#dbeafe;">Our Mission</h3>
+          <p>At City of Grace, we believe in creating an atmosphere where people can encounter God personally, grow spiritually, and experience healing, restoration, breakthrough, and purpose. Our services are centered on the Word of God, the leading of the Holy Spirit, and building strong believers rooted in faith and holiness.</p>
+        </div>
+
+        <div style="background:#1f2937; padding:30px; border-radius:24px; margin-bottom:25px; box-shadow:0 10px 25px rgba(0,0,0,0.3);">
+          <h3 style="margin-bottom:15px; color:#dbeafe;">A Spiritual Family</h3>
+          <p>We are more than a church — we are a spiritual family united by love, worship, prayer, and a passion for seeing lives changed through Christ. Whether you are seeking spiritual growth, encouragement, deliverance, or a place to belong, City of Grace welcomes you with open arms.</p>
+        </div>
+
+        <div style="background:linear-gradient(135deg, #1e3a8a, #111827); padding:30px; border-radius:24px; box-shadow:0 10px 25px rgba(0,0,0,0.35);">
+          <h3 style="margin-bottom:15px; color:#ffffff;">Scripture Foundation</h3>
+          <p style="font-style:italic; color:#e5e7eb;">“The Spirit of the Lord is upon Me, because He has anointed Me to preach the gospel to the poor… to heal the brokenhearted and set the captives free.”</p>
+          <p style="margin-top:10px; color:#93c5fd;">— Luke 4:18</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="services" id="services">
+    <div class="section-title">
+      <h2>Weekly Services</h2>
+      <p>Join us throughout the week for worship, prayer, teaching, deliverance, and spiritual growth.</p>
+    </div>
+
+    <div class="services-grid">
+
+      <div class="service-card" style="background: linear-gradient(rgba(0,0,0,0.72), rgba(0,0,0,0.78)), url('https://scontent-jnb2-1.xx.fbcdn.net/v/t39.30808-6/676171185_122339963930009274_4811069169696409812_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=7b2446&_nc_eui2=AeEoKCP4AwZqb-ToBukCBuDG889cIHqUMtrzz1wgepQy2hTokv_ba_cnxdg73OqaMZPkxoIcNYT2OVmxPdgPbcbn&_nc_ohc=TmiUIFRCJFsQ7kNvwHvHSPQ&_nc_oc=Adq0WyB0IhtU7ziGfLYOnvrQjsNFd5DOyHrf1PUd3OPuURL2ba7154m2w2tNc1OS01o&_nc_zt=23&_nc_ht=scontent-jnb2-1.xx&_nc_gid=cs-HSRxaVhVLdAcHn_-SLQ&_nc_ss=7b2a8&oh=00_Af589ZPaoYb2aHX6_INsjZGMMgkkGx7WAX4aTGH6ZLNuwg&oe=6A057160') center/cover no-repeat;">
+        <h3>Sunday Celebration Service</h3>
+        <p><strong>Sunday — 12:00 PM</strong></p>
+        <p>Experience powerful worship, prophetic teaching, healing, deliverance, and a life-changing encounter with God through the ministry of Apostle Mabuyangwe (Seer 1).</p>
+      </div>
+
+      <div class="service-card" style="background: linear-gradient(rgba(0,0,0,0.72), rgba(0,0,0,0.78)), url('https://scontent-jnb2-1.xx.fbcdn.net/v/t39.30808-6/677785769_122340114896009274_537261584936040942_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=7b2446&_nc_eui2=AeHBbynhWrXrcvM3EwQAtjYytgxG_o_aSHa2DEb-j9pIdn8HRBIFdAVD2aWNVgNbu_8v87FDiH6QVBR_3iSHpnSs&_nc_ohc=odF2l2ukMXIQ7kNvwGPl9BZ&_nc_oc=AdrkV3-Ez1Yjm5jobb3ufoqHSLb_YoQzSO27Gve5yYTNs3hxzXP6g0viscoVls9pUkY&_nc_zt=23&_nc_ht=scontent-jnb2-1.xx&_nc_gid=ZQ-dxNbinD49GsMN__1wwA&_nc_ss=7b2a8&oh=00_Af43IFQwwVHj6U0BzGfrzthv7yFhYLHnrP3SKcM35ZBvGw&oe=6A0572FF') center/cover no-repeat;">
+        <h3>Prayer & Deliverance Service</h3>
+        <p><strong>Tuesday — 10:00 AM</strong></p>
+        <p>Join us for a powerful time of prayer, spiritual warfare, healing, and deliverance as lives are restored through the power of God.</p>
+      </div>
+
+      <div class="service-card" style="background: linear-gradient(rgba(0,0,0,0.72), rgba(0,0,0,0.78)), url('https://scontent-jnb2-1.xx.fbcdn.net/v/t39.30808-6/687022877_122342603090009274_1906032262057293026_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=7b2446&_nc_eui2=AeFPgwZ753q6N10xCT47BlL0uCqs2nhUnWa4KqzaeFSdZld2fHD-6DzO5lCXI-KSwEkpv0xZU2wwgzq9_UBBpzUY&_nc_ohc=zi1bxFvHtxQQ7kNvwFFVfil&_nc_oc=AdrBsSH5DTSU4CWujFlkUPd-YXWipiM2UOsr_0K1sW6ueFotCBVli_9-1zCjXMk-Vvg&_nc_zt=23&_nc_ht=scontent-jnb2-1.xx&_nc_gid=wzypcNLwZU7MhQb6DiSzpQ&_nc_ss=7b2a8&oh=00_Af63gEtk3hd-bA1EujkC2_GcnaX01Ch0BqAk-nULzy9iqg&oe=6A0587BE') center/cover no-repeat;">
+        <h3>Midweek Word & Bible Study</h3>
+        <p><strong>Wednesday — 6:00 PM</strong></p>
+        <p>Grow deeper in faith through the teaching and revelation of God’s Word, discipleship, and spiritual understanding.</p>
+      </div>
+
+      <div class="service-card" style="background: linear-gradient(rgba(0,0,0,0.72), rgba(0,0,0,0.78)), url('https://scontent-jnb2-1.xx.fbcdn.net/v/t39.30808-6/672338944_122339270738009274_1811825832939902937_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=7b2446&_nc_eui2=AeEhvxnECvJpSgJdGJYoi_DU_vpARKv7mIP--kBEq_uYg2hQXTQ5_I7reTxSi8UZA5XTmy7PxB99WlHfqiBIzras&_nc_ohc=_1Y2xH1IHxYQ7kNvwEDHviC&_nc_oc=AdqIHpfLKJsZS5GBxPk3lT3J48BxomHwO_osg8GKcOHjuFiXEx8W8ysT1SmRN1zIKGE&_nc_zt=23&_nc_ht=scontent-jnb2-1.xx&_nc_gid=r2BrVpUZoh1hpITagJ-o0A&_nc_ss=7b2a8&oh=00_Af67iI31wLs-pcEmPIuW0WjO6Tok0sPPet0vIDlIK_fa-g&oe=6A0596E8') center/cover no-repeat;">
+        <h3>Friday Revival & Teaching Service</h3>
+        <p><strong>Friday — 6:00 PM</strong></p>
+        <p>A powerful evening of worship, biblical teaching, prayer, and deliverance designed to strengthen believers spiritually.</p>
+      </div>
+
+      <div class="service-card" style="background: linear-gradient(rgba(0,0,0,0.72), rgba(0,0,0,0.78)), url('https://scontent-jnb2-1.xx.fbcdn.net/v/t39.30808-6/670896115_122338779086009274_2202681865114911890_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=7b2446&_nc_eui2=AeFGtmAphOibOouK_ZZpJSxUb9-MA6H9g8pv34wDof2DyhaH_54_qR-T2c78sjYCjG-Gb3I-_BJ-_DKxF-c8th2h&_nc_ohc=JWk_D5oXYUoQ7kNvwEc5wdg&_nc_oc=AdoTDfcXbkgC6No9NbSQOFWXWyd8AK5oIXdkM9YrJEbAuMbRAvXAG05zDtO1dQAqeuU&_nc_zt=23&_nc_ht=scontent-jnb2-1.xx&_nc_gid=pRYGEw18Kn67753DC9ye3g&_nc_ss=7b2a8&oh=00_Af4_ymc7onG2_1JGAQCEBEZk-7x16OuN9fiKO_Hfnlql0g&oe=6A059CA5') center/cover no-repeat;">
+        <h3>Night Prayer Services</h3>
+        <p><strong>Special Scheduled Dates</strong></p>
+        <p>Intense overnight prayer gatherings filled with worship, intercession, prophecy, deliverance, and spiritual revival.</p>
+      </div>
+
+      <div class="service-card" style="background: linear-gradient(rgba(0,0,0,0.72), rgba(0,0,0,0.78)), url('https://scontent-jnb2-1.xx.fbcdn.net/v/t39.30808-6/644335702_122331176306009274_8831995345707779114_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=7b2446&_nc_eui2=AeHneDyx5ONQIitG2aCNmHO70H2bdGGgbHvQfZt0YaBsezoD5QvTYE5M5WbQm17diDBG34ni83dCfJmRjcwA96fT&_nc_ohc=g90vbZUfEkcQ7kNvwHsNdFj&_nc_oc=AdqSy1595soMIbx75MjoYlF2H-70ibmFsdIEoUJ8XfnNTliUNQ7hsDacJnP9jHlNszE&_nc_zt=23&_nc_ht=scontent-jnb2-1.xx&_nc_gid=JPvytWlRg7sTHp2mNOKAFg&_nc_ss=7b2a8&oh=00_Af7GdapAhMHvfD7VSkiXVvn8El1y7wJMKS_udW4Bopma4Q&oe=6A0594F0') center/cover no-repeat;">
+        <h3>Home Cell Fellowship</h3>
+        <p><strong>Various Locations & Times</strong></p>
+        <p>Small fellowship gatherings focused on prayer, encouragement, Bible study, and spiritual growth within the community.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <div style="height: 80px; background: linear-gradient(to bottom, #111827, #1b2533);"></div>
+
+  <section class="leader" id="leader">
+    <img src="https://scontent-jnb2-1.xx.fbcdn.net/v/t39.30808-6/487423754_122266323308009274_6579474675950520305_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=1d70fc&_nc_eui2=AeHlEwz5qtd4Sum3f_OV9bLqWaJGCt2LMchZokYK3YsxyF3XBipHLEFl-k5KZUQurU8HeOMynimhpGK1rLlFs42X&_nc_ohc=LEwP_NAyleMQ7kNvwG0SlEJ&_nc_oc=Adp9Za3Xdg0B3h1bLEbscyLy8XXk2UCpxCAABLpYfvWC0g1KT4uva7_-9i2tUraKfJM&_nc_zt=23&_nc_ht=scontent-jnb2-1.xx&_nc_gid=fYt_eLgconf01hkJ2u5lfQ&_nc_ss=7b2a8&oh=00_Af42smMa8IkPHp9_WdfYRKKKI0VZjstqp0js1jg_D-h94g&oe=6A056061" alt="Seer 1">
+    <h2>Seer 1</h2>
+    <p>
+      Spiritual Leader of City of Grace Church
+    </p>
+    <br>
+    <p style="max-width: 700px; margin:auto;">
+      Apostle Mabuyangwe, widely known as Seer 1, is a servant of God dedicated 
+      to leading people into spiritual transformation through prophetic ministry,
+      prayer, deliverance, and the teaching of God’s Word. Through City of Grace,
+      many lives continue to experience healing, restoration, and renewed faith in Christ.
+    </p>
+    <br>
+    <p style="max-width: 700px; margin:auto;">
+      Under the guidance of Seer 1, City of Grace continues to impact lives through prophetic ministry, prayer, and the teaching of God's Word.
+    </p>
+    <br>
+    <a class="btn" href="https://www.facebook.com/profile.php?id=61550278220024" target="_blank">
+      Visit Our Facebook Page
+    </a>
+
+    <a class="btn" href="http://www.youtube.com/@Mabuyangweministries" target="_blank" style="margin-left: 10px;">
+      Visit Our YouTube Channel
+    </a>
+
+    <a class="btn" href="https://wa.me/27714721655" target="_blank" style="margin-left: 10px;">
+      Chat on WhatsApp
+
+    </a>
+    <a class="btn" href="https://www.tiktok.com/@cityofgracechurch0?_r=1&_t=ZS-96EB1aeFNlC" target="_blank" style="margin-left: 10px;">
+      Visit Our TikTok
+    </a>
+  </section>
+
+  <section id="gallery">
+    <div class="section-title">
+      <h2>Church Gallery</h2>
+      <p>Moments of worship, fellowship, and transformation.</p>
+    </div>
+
+    <div class="gallery-grid">
+      <img src="https://scontent-jnb2-1.xx.fbcdn.net/v/t39.30808-6/674539610_122339963798009274_4833037574183150964_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=7b2446&_nc_eui2=AeHJ6DN9uaMH9KlWwG654k6_cV7sQzJCtBRxXuxDMkK0FGVoe04NYt-qNXWmiCKuIRAJrYM9zt4cZW-xoI53oC3j&_nc_ohc=AQE30oCd7YAQ7kNvwGh2soR&_nc_oc=AdpkC33kMjZ2z_GhfUytB7RRQD7aXvI82zAs1Ffqp7O3U6XIAVAQ295Yf0WNAz59n5E&_nc_zt=23&_nc_ht=scontent-jnb2-1.xx&_nc_gid=Lq3UEcHDRkP5aSxgJDC-rw&_nc_ss=7b2a8&oh=00_Af5cRwz0X81N6Rpq_R6i21_7yBSLgdX1QVG3NxvsuKSCtg&oe=6A0578DF" alt="City of Grace Church Gallery">
+
+      <img src="https://scontent-jnb2-1.xx.fbcdn.net/v/t39.30808-6/678108647_122339895056009274_5362189027161147470_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=7b2446&_nc_eui2=AeEXp8UYQdTo3ak_pe7vL-aEdegOfL5oKZJ16A58vmgpkpabfqDcTAC6o9kebdreapDZxW4nanyNOCkkMy1_yDse&_nc_ohc=tsWni0em76AQ7kNvwFy3x_k&_nc_oc=AdpMiAGHkJbQ0dxItFHUmbRTFkeubtOsVuNbl0tCnxElRwoJnL9PUs4YhCW8S1n1H-U&_nc_zt=23&_nc_ht=scontent-jnb2-1.xx&_nc_gid=UxjKllYrz574U3A94tX36Q&_nc_ss=7b2a8&oh=00_Af7AHav4M2_NHZfhWJ6VpJ1vCNE87mdgI0pAB1xq23MeTQ&oe=6A057787" alt="Church Worship Experience">
+
+      <img src="https://scontent-jnb2-1.xx.fbcdn.net/v/t39.30808-6/671149794_122339270870009274_3830415314851895091_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=7b2446&_nc_eui2=AeEyEjLO1khnjZBPXZ2gIIOcHLz7ES9YGh8cvPsRL1gaH4zoME54MioN2UZoVOe95GrHZ7Hzs31XC2WwfCSy3Umi&_nc_ohc=X8-MGRPJjykQ7kNvwG1NPZ8&_nc_oc=Adq2VytdFiYfodALoPFn9hDxDiYs-so9kBiXyu-HtPJSV6To5m-hkOndy-pgWTg1ucM&_nc_zt=23&_nc_ht=scontent-jnb2-1.xx&_nc_gid=I8wctk4mc4OLVxJ4cbtRwg&_nc_ss=7b2a8&oh=00_Af68mVZncCG7l6FXNgs87234x7zBSv_gssC0xrCJKqbMwA&oe=6A056F2B" alt="City of Grace Fellowship">
+
+      <img src="https://scontent-jnb2-1.xx.fbcdn.net/v/t39.30808-6/662522986_122337687050009274_3861204817610178755_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=7b2446&_nc_eui2=AeE4br_riCGIHbowt974g0jw55qKrTM758TnmoqtMzvnxDKmLjpuxyr4Cmu-Rm31mY2OI5QCurH4LSPMNCHgctVx&_nc_ohc=WuXwVODcXkYQ7kNvwFMGHQ5&_nc_oc=AdpMHRi9Fnw28mmEv2YZCuE0NHMtkV249gSQFtQP-eWx3KaMjoUXf8Xer2OsKy_j0yI&_nc_zt=23&_nc_ht=scontent-jnb2-1.xx&_nc_gid=RtfA8WwpnWEQOzVjRA6vCw&_nc_ss=7b2a8&oh=00_Af7xp3Ow6fSn9sA-GyqG6n11Ygg8q2d8W6JH76JUxlN9vw&oe=6A05771B" alt="Church Gathering">
+
+      <img src="https://scontent-jnb2-1.xx.fbcdn.net/v/t39.30808-6/657516626_122336647532009274_2575363806470119967_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=7b2446&_nc_eui2=AeGWkjIhW8lEnxMy3N8oK3a485psI2H_QqnzmmwjYf9CqbqkNP-mkQWDxU0WQLtd0K7qrYaZwxBcHSIiMiQ1IJ3I&_nc_ohc=fpaiwllf5BMQ7kNvwEPKm-Z&_nc_oc=Adrd3mJc2e8RJ2BEkmnsl7h4mUosDV8QKpAj4QaN5H9FdYjUPRS5QvJGd4gfRA5NqfA&_nc_zt=23&_nc_ht=scontent-jnb2-1.xx&_nc_gid=HyhoyqtBWhY_t4YmPh48KA&_nc_ss=7b2a8&oh=00_Af57wHghiKef_54YD-0cN2-03lWqt5q-QnJDlWW1I5sspw&oe=6A057AB6" alt="Church Service">
+
+      <img src="https://scontent-jnb2-1.xx.fbcdn.net/v/t39.30808-6/658827018_122336646842009274_1462829473199937572_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=7b2446&_nc_eui2=AeHo3YP2jYx5dNjRJmgWb2dMO8Dm2n-MhTE7wObaf4yFMQXqclg4I-_A2Xe7fgLs0Mf3dDjjy-oIbnkEBpCyuIbs&_nc_ohc=nTR6EKTVE3AQ7kNvwHi1aHP&_nc_oc=Adrusot3wVTURSbQY4S8FrBb6ldysgtzSW_a3JR1irakteu8H9GXxHuhu0bCmJ9DODo&_nc_zt=23&_nc_ht=scontent-jnb2-1.xx&_nc_gid=hJ6Sw5ogNa8d9kt4UryzXg&_nc_ss=7b2a8&oh=00_Af5owADCm4PQTQgJqvzUxXYIEJr3IIwRhGNSEQnl1K9Pig&oe=6A0582E0" alt="Praise and Worship">
+
+      <img src="https://scontent-jnb2-1.xx.fbcdn.net/v/t39.30808-6/658159381_122336646560009274_4255987155365722943_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=7b2446&_nc_eui2=AeE3_yZLaLt1J0vs2g0VS-in7PbhsZQPAjDs9uGxlA8CMJbq1uxdTNbus1HJC8fhktNsoySSGODBQJzZ5UeiTN5Z&_nc_ohc=ItlfVJSTpUUQ7kNvwF5omYU&_nc_oc=AdpB4gzxjzb-KPQRUtokxOy4lFrnHm93DSVkq7qj5hIJsytkGua5NNh_cjiLBPzLxJY&_nc_zt=23&_nc_ht=scontent-jnb2-1.xx&_nc_gid=MX7S1uj4NoopzG7F_Q8yQg&_nc_ss=7b2a8&oh=00_Af5akdf0AG-XpDuQIHmeP5p-0g2fn1Q8rG2JpzQklanY-A&oe=6A0587DB" alt="Prayer Session">
+
+      <img src="https://scontent-jnb2-1.xx.fbcdn.net/v/t39.30808-6/660652005_122336644820009274_452806012769240864_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=7b2446&_nc_eui2=AeHQmB7xc4DxW8qtR6mraIAWUoqSlqXR3vNSipKWpdHe84cIkRjEv5mY-nHvVc5U3PP-yx8LbaS9wm8pySS7yVJ5&_nc_ohc=hAf8k2j-7_oQ7kNvwHiKwgg&_nc_oc=AdolpRZ1LACEbGTxcByTx_KCvntHCalb_1VTmserG89BO9sfXVCAIxJjvjQWkuhQPf8&_nc_zt=23&_nc_ht=scontent-jnb2-1.xx&_nc_gid=6WJg7wLM2pyFnbkayugRbA&_nc_ss=7b2a8&oh=00_Af6Z6Usp97_VGFgRvl5mnOmPeF0Zj32N8FFIKmkxa3u1-A&oe=6A058436" alt="Church Conference">
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="section-title">
+      <h2>Contact Us</h2>
+      <p>We would love to hear from you.</p>
+    </div>
+
+    <div class="contact-container">
+      <div style="padding:40px; border-radius:20px; color:white; min-height:300px; display:flex; flex-direction:column; justify-content:center; background: rgba(0,0,0,0.45);">
+
+        <h3 style="color:#ffffff; margin-bottom:15px;">Church Information</h3>
+        <p><strong>Church:</strong> City of Grace</p>
+        <p><strong>Leader:</strong> Apostle Mabuyangwe (Seer 1)</p>
+        <p><strong>Email:</strong> info@cityofgrace.org</p>
+        <p><strong>Phone:</strong> +277 147 21655</p>
+        <p><strong>Location:</strong> Mhinga Ext 15, Malamulele, Limpopo</p>
+      </div>
+
+      <form class="contact-form">
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <textarea rows="5" placeholder="Your Message"></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 City of Grace Church | All Rights Reserved</p>
+  </footer>
+
+<script src="script.js"></script>
+</body>
+</html>
